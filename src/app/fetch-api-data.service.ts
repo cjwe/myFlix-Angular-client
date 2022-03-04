@@ -13,7 +13,6 @@ import { map } from 'rxjs/operators';
 const token = localStorage.getItem('token');
 // ...user
 const user = localStorage.getItem('user');
-
 // Declare the API URL that will provide data for the client app
 const apiUrl = 'https://miyazaki-movie-api.herokuapp.com/';
 
@@ -378,4 +377,8 @@ export class DeleteUserFavoriteService {
       'Something went wrong when trying to delete movie from favorites; please try again later.'
     );
   }
+}
+
+export class FetchApiDataService {
+  constructor() {}
 }
