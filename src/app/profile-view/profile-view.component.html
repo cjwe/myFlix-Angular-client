@@ -1,6 +1,7 @@
 <div style="display: flex; justify-content: center">
-  <mat-card>
+  <mat-card style="width: 40%">
     <mat-card-header>
+      <mat-card-title>Hello {{ user?.Username }}!</mat-card-title>
       <mat-card-title> Your Profile </mat-card-title>
     </mat-card-header>
     <mat-card-content> Username: {{ user.Username }}</mat-card-content>
@@ -13,15 +14,34 @@
       <button mat-raised-button (click)="updateUserDetails()">
         Update Profile
       </button>
-      <button mat-raised-button>Delete Account</button>
+      <button mat-raised-button color="warn" (click)="deleteUser()">
+        Delete Account
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>
-<div>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Your favorite movies</mat-card-title>
-    </mat-card-header>
-    <mat-card-content> </mat-card-content>
-  </mat-card>
+<div style="display: flex; justify-content: center">
+  <div *ngFor="let movie of favorites" style="display: flex; margin: 15px">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title> {{ movie.Title }} </mat-card-title>
+        <mat-card-subtitle>
+          Directed by: {{ movie.Director.Name }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <img src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" />
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          class="profile-btn"
+          mat-raised-button
+          (click)="deleteFavorite(movie._id)"
+          style="margin-right: 10px"
+        >
+          Remove favorite
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

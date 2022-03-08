@@ -22,6 +22,7 @@ const apiUrl = 'https://miyazaki-movie-api.herokuapp.com/';
 export class FetchApiDataService {
   constructor(private http: HttpClient, private router: Router) {}
 
+  // POST login and registration requests
   // User Registration
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
@@ -38,6 +39,7 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
+  // GET requests
   // Get all movies
   getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
@@ -95,10 +97,9 @@ export class FetchApiDataService {
   }
 
   // Get user's favorites
-  // UNESTABLISHED ENDPOINT
   getFavorites(): Observable<any> {
     return this.http
-      .get(apiUrl + 'users/:Username/:Favorites', {
+      .get(apiUrl + `users/${username}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -106,11 +107,11 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  // POST requests
   //  Add movie to user's favorites
   addFavorite(id: string): Observable<any> {
-    const token = localStorage.getItem('token');
     return this.http
-      .post(apiUrl + `users/${username}/movies/${id}`, {
+      .post(apiUrl + `users/${username}/movies/${id}`, null, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -118,6 +119,7 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  // PUT requests
   //  Edit user
   editUserProfile(username: string, userData: object): Observable<any> {
     return this.http
@@ -129,8 +131,9 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  // DELETE requests
   // Delete user
-  public deleteUserProfile(): Observable<any> {
+  public deleteUser(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
       .delete(apiUrl + `users/${username}`, {
@@ -141,10 +144,10 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  // Delete user's favorite movie
+  // Delete a favorite movie
   deleteFavorite(id: string): Observable<any> {
     return this.http
-      .delete(apiUrl + `/users/${username}/movies/${id}`, {
+      .delete(apiUrl + `users/${username}/movies/${id}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),

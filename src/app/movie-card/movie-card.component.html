@@ -1,7 +1,25 @@
 <div style="display: flex">
   <mat-card *ngFor="let movie of movies" style="flex: 1 1 auto">
     <mat-card-header>
-      <mat-card-title>{{ movie.Title }}</mat-card-title>
+      <mat-card-title
+        >{{ movie.Title }}
+        <div class="favorite">
+          <mat-icon
+            *ngIf="!isFavorited(movie._id)"
+            (click)="handleFavorite(movie._id)"
+            class="heart-icon"
+          >
+            favorite_border
+          </mat-icon>
+          <mat-icon
+            *ngIf="isFavorited(movie._id)"
+            (click)="handleUnfavorite(movie._id)"
+            class="heart-icon"
+          >
+            favorite
+          </mat-icon>
+        </div>
+      </mat-card-title>
       <mat-card-subtitle
         >Directed by: {{ movie.Director.Name }}</mat-card-subtitle
       >
@@ -11,7 +29,6 @@
       <button mat-button color="primary">Genre</button>
       <button mat-button color="primary">Director</button>
       <button mat-button color="primary">Synopsis</button>
-      <mat-icon>favorite_border</mat-icon>
     </mat-card-actions>
   </mat-card>
 </div>

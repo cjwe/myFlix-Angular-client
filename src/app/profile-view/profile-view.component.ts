@@ -12,6 +12,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 })
 export class ProfileViewComponent implements OnInit {
   user: any = {};
+  favorites: any[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -27,18 +28,59 @@ export class ProfileViewComponent implements OnInit {
     this.getUser();
   }
 
-  /**
-   * Gets user info from backend
-   */
+  // Gets user data to display
   getUser(): void {
     let user = localStorage.getItem('Username');
     console.log(user);
     this.fetchApiData.getUser().subscribe((res: any) => {
       this.user = res;
+      this.getFavorites();
     });
   }
 
+  // Open dialog with user form component to update user details
   updateUserDetails(): void {
     this.dialog.open(UserUpdateFormComponent, { width: '500px' });
+  }
+
+  // Get user favorites
+  getFavorites(): void {
+    this.fetchApiData.getAllMovies().subscribe((res: any) => {
+      this.favorites = res.filter((movie: any) => {
+        return this.user.FavoriteMovies.includes(movie._id);
+      });
+      console.log(this.favorites);
+      return this.favorites;
+    });
+  }
+
+  // Delete a user favorite
+  deleteFavorite(id: string): void {
+    this.fetchApiData.deleteFavorite(id).subscribe((res: any) => {
+      this.snackBar.open(`Successfully removed from favorite movies.`, 'OK', {
+        duration: 2000,
+      });
+      this.ngOnInit();
+      return this.favorites;
+    });
+  }
+
+  // Open confirmation to delete profile or cancel, if confirmed deletes account and clears local storage, reroutes to welcome screen.
+  deleteUser(): void {
+    if (confirm('Are you sure? This cannot be undone.')) {
+      this.fetchApiData.deleteUser().subscribe(
+        () => {
+          this.snackBar.open('Your account was deleted.', 'OK', {
+            duration: 3000,
+          });
+          localStorage.clear();
+        },
+        () => {
+          this.router.navigate(['welcome']).then(() => {
+            window.location.reload();
+          });
+        }
+      );
+    }
   }
 }
