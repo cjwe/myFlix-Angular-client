@@ -26,6 +26,8 @@ export class UserLoginFormComponent implements OnInit {
     this.fetchApiData.userLogin(this.userData).subscribe(
       //successful login
       (result) => {
+        localStorage.setItem('user', result.user.Username);
+        localStorage.setItem('token', result.token);
         this.router.navigate(['movies']);
         this.dialogRef.close();
         console.log(result);
