@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { FormsModule } from '@angular/forms';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
@@ -28,6 +29,7 @@ import { UserUpdateFormComponent } from './user-update-form/user-update-form.com
 import { MovieSynopsisViewComponent } from './movie-synopsis-view/movie-synopsis-view.component';
 import { MovieDirectorViewComponent } from './movie-director-view/movie-director-view.component';
 import { MovieGenreViewComponent } from './movie-genre-view/movie-genre-view.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -65,6 +67,8 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    MatGridListModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -13,6 +13,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 export class ProfileViewComponent implements OnInit {
   user: any = {};
   favorites: any[] = [];
+  opened = false;
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -82,5 +83,23 @@ export class ProfileViewComponent implements OnInit {
         }
       );
     }
+  }
+
+  // Router links...
+  // to movies view
+  goToMoviesPage(): void {
+    this.router.navigate(['movies']);
+  }
+  // to profile view
+  goToProfilePage(): void {
+    this.router.navigate(['profile']);
+  }
+
+  // Handle logout
+  logout(): void {
+    localStorage.clear();
+    this.router.navigate(['welcome']).then(() => {
+      window.location.reload();
+    });
   }
 }

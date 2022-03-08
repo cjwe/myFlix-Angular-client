@@ -1,50 +1,119 @@
-<div style="display: flex; justify-content: center">
-  <mat-card style="width: 40%">
-    <mat-card-header>
-      <mat-card-title>Hello {{ user?.Username }}!</mat-card-title>
-      <mat-card-title> Your Profile </mat-card-title>
-    </mat-card-header>
-    <mat-card-content> Username: {{ user.Username }}</mat-card-content>
-    <mat-card-content> Email: {{ user.Email }} </mat-card-content>
-    <mat-card-content>
-      Birthday:
-      {{ user.Birthday | date: "mediumDate" }}
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button (click)="updateUserDetails()">
-        Update Profile
-      </button>
-      <button mat-raised-button color="warn" (click)="deleteUser()">
-        Delete Account
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</div>
-<div style="text-align: center">
-  <h2>Your Favorites</h2>
-  <div style="display: flex; justify-content: center">
-    <div *ngFor="let movie of favorites" style="display: flex; margin: 15px">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title> {{ movie.Title }} </mat-card-title>
-          <mat-card-subtitle>
-            Directed by: {{ movie.Director.Name }}
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <img src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" />
-        </mat-card-content>
-        <mat-card-actions>
-          <button
-            class="profile-btn"
-            mat-raised-button
-            (click)="deleteFavorite(movie._id)"
-            style="margin-right: 10px"
+<mat-sidenav-container>
+  <mat-sidenav mode="side" [(opened)]="opened">
+    <mat-list-item routerLinkActive="active current">
+      <a
+        matLine
+        routerLink="movies"
+        (click)="goToMoviesPage()"
+        style="margin-right: 15px; text-decoration: none"
+      >
+        Movies
+      </a>
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active current">
+      <a
+        matLine
+        routerLink="profile"
+        (click)="goToProfilePage()"
+        style="margin-right: 15px; text-decoration: none"
+      >
+        Profile
+      </a>
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active current">
+      <a
+        matLine
+        routerLink="logout"
+        (click)="logout()"
+        style="text-decoration: none"
+      >
+        Logout
+      </a>
+    </mat-list-item>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="sidenav-content" style="width: 100vw">
+      <mat-toolbar>
+        <button
+          mat-icon-button
+          class="example-icon"
+          aria-label="Example icon-button with menu icon"
+          (click)="opened = !opened"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>myGhibli</span>
+        <span class="example-spacer"></span>
+        <button
+          mat-icon-button
+          class="example-icon favorite-icon"
+          aria-label="Example icon-button with heart icon"
+        >
+          <mat-icon>favorite</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          class="example-icon"
+          aria-label="Example icon-button with share icon"
+        >
+          <mat-icon>share</mat-icon>
+        </button>
+      </mat-toolbar>
+
+      <!-- Main content   -->
+      <div style="display: flex; justify-content: center">
+        <mat-card style="width: 40%">
+          <mat-card-header>
+            <mat-card-title>Hello {{ user?.Username }}!</mat-card-title>
+            <mat-card-title> Your Profile </mat-card-title>
+          </mat-card-header>
+          <mat-card-content> Username: {{ user.Username }}</mat-card-content>
+          <mat-card-content> Email: {{ user.Email }} </mat-card-content>
+          <mat-card-content>
+            Birthday:
+            {{ user.Birthday | date: "mediumDate" }}
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button (click)="updateUserDetails()">
+              Update Profile
+            </button>
+            <button mat-raised-button color="warn" (click)="deleteUser()">
+              Delete Account
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div style="text-align: center">
+        <h2>Your Favorites</h2>
+        <div style="display: flex; justify-content: center">
+          <div
+            *ngFor="let movie of favorites"
+            style="display: flex; margin: 15px"
           >
-            Remove favorite
-          </button>
-        </mat-card-actions>
-      </mat-card>
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title> {{ movie.Title }} </mat-card-title>
+                <mat-card-subtitle>
+                  Directed by: {{ movie.Director.Name }}
+                </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <img src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" />
+              </mat-card-content>
+              <mat-card-actions>
+                <button
+                  class="profile-btn"
+                  mat-raised-button
+                  (click)="deleteFavorite(movie._id)"
+                  style="margin-right: 10px"
+                >
+                  Remove favorite
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

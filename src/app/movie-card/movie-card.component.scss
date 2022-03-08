@@ -3,10 +3,51 @@ mat-sidenav-container {
 }
 
 mat-sidenav {
-  background-color: lightcoral;
+  background-color: pink;
   width: 200px;
+  padding: 16px;
 }
 
 .example-spacer {
   flex: 1 1 auto;
+}
+
+mat-card {
+  position: relative;
+  border: none !important;
+  height: 100%;
+  min-height: 370px;
+  min-width: 220px;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+mat-card img {
+  object-fit: cover;
+}
+
+mat-card-header {
+  display: block;
+}
+
+.mat-card-actions {
+  align-content: space-between;
+}
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+
+  mat-icon {
+    margin-right: 8px;
+  }
+}
+
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
 }

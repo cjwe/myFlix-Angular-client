@@ -1,0 +1,17 @@
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  background-color: pink;
+  width: 200px;
+  padding: 16px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-card:not([class*="mat-elevation-z"]) {
+  box-shadow: none;
+}

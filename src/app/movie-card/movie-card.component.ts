@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
-
+import { Router } from '@angular/router';
 // Movie card components
 import { MovieSynopsisViewComponent } from '../movie-synopsis-view/movie-synopsis-view.component';
 import { MovieDirectorViewComponent } from '../movie-director-view/movie-director-view.component';
@@ -19,11 +19,13 @@ export class MovieCardComponent {
 
   constructor(
     public fetchApiData: FetchApiDataService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
     this.getMovies();
+    this.getFavorites();
   }
 
   // Get list of all movies
@@ -36,7 +38,7 @@ export class MovieCardComponent {
   }
 
   // Get list of user favorites
-  getFavs(): void {
+  getFavorites(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.favorites = resp.FavoriteMovies;
       console.log(this.favorites);
@@ -52,14 +54,14 @@ export class MovieCardComponent {
   // Adds movie to favorites
   handleFavorite(id: string): void {
     this.fetchApiData.addFavorite(id).subscribe(() => {
-      this.getFavs();
+      this.getFavorites();
     });
   }
 
   // Removes movie from favorites
   handleUnfavorite(id: string): void {
     this.fetchApiData.deleteFavorite(id).subscribe(() => {
-      this.getFavs();
+      this.getFavorites();
     });
   }
   // Opens director dialog
@@ -93,6 +95,24 @@ export class MovieCardComponent {
         Description: description,
       },
       width: '500px',
+    });
+  }
+
+  // Router links...
+  // to movies view
+  goToMoviesPage(): void {
+    this.router.navigate(['movies']);
+  }
+  // to profile view
+  goToProfilePage(): void {
+    this.router.navigate(['profile']);
+  }
+
+  // Handle logout
+  logout(): void {
+    localStorage.clear();
+    this.router.navigate(['welcome']).then(() => {
+      window.location.reload();
     });
   }
 }
