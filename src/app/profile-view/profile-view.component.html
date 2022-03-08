@@ -1,63 +1,50 @@
 <mat-sidenav-container>
   <mat-sidenav mode="side" [(opened)]="opened">
-    <mat-list-item routerLinkActive="active current">
-      <a
-        matLine
-        routerLink="movies"
-        (click)="goToMoviesPage()"
-        style="margin-right: 15px; text-decoration: none"
-      >
-        Movies
-      </a>
-    </mat-list-item>
-    <mat-list-item routerLinkActive="active current">
-      <a
-        matLine
-        routerLink="profile"
-        (click)="goToProfilePage()"
-        style="margin-right: 15px; text-decoration: none"
-      >
-        Profile
-      </a>
-    </mat-list-item>
-    <mat-list-item routerLinkActive="active current">
-      <a
-        matLine
-        routerLink="logout"
-        (click)="logout()"
-        style="text-decoration: none"
-      >
-        Logout
-      </a>
-    </mat-list-item>
+    <button
+      mat-button
+      class="menu-button"
+      routerLink="movies"
+      (click)="goToMoviesPage()"
+    >
+      <mat-icon>movie</mat-icon>
+      Movies
+    </button>
+    <button
+      mat-button
+      class="menu-button"
+      routerLink="profile"
+      (click)="goToProfilePage()"
+    >
+      <mat-icon>face</mat-icon>
+      Profile
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button
+      mat-button
+      class="menu-button"
+      routerLink="logout"
+      (click)="logout()"
+    >
+      <mat-icon>power_settings_new</mat-icon>
+      Log out
+    </button>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="sidenav-content" style="width: 100vw">
-      <mat-toolbar>
+      <mat-toolbar style="text-align: center">
+        <!-- Toggler -->
         <button
           mat-icon-button
           class="example-icon"
           aria-label="Example icon-button with menu icon"
+          style="align-self: left"
           (click)="opened = !opened"
         >
           <mat-icon>menu</mat-icon>
         </button>
         <span>myGhibli</span>
-        <span class="example-spacer"></span>
-        <button
-          mat-icon-button
-          class="example-icon favorite-icon"
-          aria-label="Example icon-button with heart icon"
-        >
-          <mat-icon>favorite</mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          class="example-icon"
-          aria-label="Example icon-button with share icon"
-        >
-          <mat-icon>share</mat-icon>
-        </button>
       </mat-toolbar>
 
       <!-- Main content   -->
