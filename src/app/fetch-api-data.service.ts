@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 // ...token
 const token = localStorage.getItem('token');
 // ...user
-const username = localStorage.getItem('username');
+const username = localStorage.getItem('Username');
 // Declare the API URL that will provide data for the client app
 const apiUrl = 'https://miyazaki-movie-api.herokuapp.com/';
 
@@ -119,8 +119,7 @@ export class FetchApiDataService {
   }
 
   //  Edit user
-  editUserProfile(userData: object): Observable<any> {
-    const token = localStorage.getItem('token');
+  editUserProfile(username: string, userData: object): Observable<any> {
     return this.http
       .put(apiUrl + `users/${username}`, userData, {
         headers: new HttpHeaders({
