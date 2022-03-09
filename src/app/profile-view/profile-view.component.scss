@@ -1,9 +1,22 @@
+$blue: #00b3d6;
+$lblue: #d9f1f5;
+
+body {
+  background: rgb(217, 241, 245);
+  background: linear-gradient(
+    180deg,
+    rgba(217, 241, 245, 1) 0%,
+    rgba(0, 179, 214, 1) 100%
+  );
+}
+
 mat-sidenav-container {
   height: 100%;
 }
 
 mat-sidenav {
-  background-color: pink;
+  background-color: $blue;
+  color: $lblue;
   width: 200px;
   padding: 16px;
 }
@@ -12,6 +25,62 @@ mat-sidenav {
   flex: 1 1 auto;
 }
 
-.mat-card:not([class*="mat-elevation-z"]) {
-  box-shadow: none;
+mat-card {
+  margin: 15px;
+}
+
+mat-card img {
+  object-fit: cover;
+}
+
+mat-card-header {
+  display: block;
+}
+
+.mat-card-actions {
+  align-content: space-between;
+}
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+
+  mat-icon {
+    margin-right: 8px;
+  }
+}
+
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.mat-drawer-side {
+  border: none;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  background-color: $lblue;
+}
+
+.toolbar-title {
+  color: $blue;
+}
+
+.profile-title {
+  color: $blue;
+}
+
+.icon {
+  color: $blue;
+}
+
+h2 {
+  color: $blue;
+  margin: 0;
 }

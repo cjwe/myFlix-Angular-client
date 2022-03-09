@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<mat-sidenav-container style="">
   <mat-sidenav mode="side" [(opened)]="opened">
     <button
       mat-button
@@ -42,17 +42,20 @@
           style="align-self: left"
           (click)="opened = !opened"
         >
-          <mat-icon>menu</mat-icon>
+          <mat-icon class="icon">menu</mat-icon>
         </button>
-        <span>myGhibli</span>
+        <span class="toolbar-title">myGhibli</span>
       </mat-toolbar>
 
       <!-- Main content   -->
       <div style="display: flex; justify-content: center">
-        <mat-card style="width: 40%">
+        <mat-card
+          style="width: 40%; text-align: center; margin: 15px; padding: 30px"
+        >
           <mat-card-header>
-            <mat-card-title>Hello {{ user?.Username }}!</mat-card-title>
-            <mat-card-title> Your Profile </mat-card-title>
+            <mat-card-title class="profile-title">
+              Your Profile
+            </mat-card-title>
           </mat-card-header>
           <mat-card-content> Username: {{ user.Username }}</mat-card-content>
           <mat-card-content> Email: {{ user.Email }} </mat-card-content>
@@ -72,26 +75,37 @@
       </div>
       <div style="text-align: center">
         <h2>Your Favorites</h2>
-        <div style="display: flex; justify-content: center">
+        <div
+          class="card-group"
+          style="display: flex; flex-wrap: wrap; justify-content: center"
+        >
           <div
             *ngFor="let movie of favorites"
             style="display: flex; margin: 15px"
           >
-            <mat-card>
-              <mat-card-header>
+            <mat-card style="margin: 10px; max-width: 250px">
+              <div
+                class="header"
+                style="display: block; text-align: left; min-height: 80px"
+              >
                 <mat-card-title> {{ movie.Title }} </mat-card-title>
                 <mat-card-subtitle>
                   Directed by: {{ movie.Director.Name }}
                 </mat-card-subtitle>
-              </mat-card-header>
+              </div>
               <mat-card-content>
-                <img src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" />
+                <img
+                  mat-card-image
+                  src="{{ movie.ImagePath }}"
+                  alt="{{ movie.Title }}"
+                />
               </mat-card-content>
               <mat-card-actions>
                 <button
                   class="profile-btn"
                   mat-raised-button
                   (click)="deleteFavorite(movie._id)"
+                  color="warn"
                   style="margin-right: 10px"
                 >
                   Remove favorite

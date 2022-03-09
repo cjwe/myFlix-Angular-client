@@ -1,3 +1,24 @@
+$blue: #00b3d6;
+$lblue: #d9f1f5;
+
 .mat-card:not([class*="mat-elevation-z"]) {
   box-shadow: none;
+}
+
+div {
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.login {
+  background-color: $blue;
+}
+
+.signup {
+  background-color: $lblue;
 }
