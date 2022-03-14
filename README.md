@@ -3,7 +3,7 @@
   <img height="200" src="https://i.imgur.com/eYSa59l.png" >
   <img height="200" src="https://i.imgur.com/Bmw0czZ.png" >
 </p>
-This single-page, responsive application  (SPA) is the client-side for an application called myFlix based on its existing server-side code (REST API and database), with supporting documentation. It features  routing, rich interactions, several interface views, and a polished user experience.
+This single-page, responsive application  (SPA) is the client-side for an application called myFlix (myGhibli) based on its existing server-side code (REST API and database), with supporting documentation. It features  routing, rich interactions, several interface views, and a polished user experience.
 
 The frontend views for this application consists of the following:
 - Welcome view
