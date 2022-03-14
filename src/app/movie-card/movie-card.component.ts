@@ -1,3 +1,7 @@
+/**
+ * Renders a view of the entire list of movies displayed as cards.
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -32,7 +36,7 @@ export class MovieCardComponent {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((response: any) => {
       this.movies = response;
-      console.log(this.movies);
+      // console.log(this.movies);
       return this.movies;
     });
   }
@@ -41,30 +45,46 @@ export class MovieCardComponent {
   getFavorites(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.favorites = resp.FavoriteMovies;
-      console.log(this.favorites);
+      // console.log(this.favorites);
       return this.favorites;
     });
   }
 
-  // Returns if id of favorited movies
+  /**
+   * Returns if movie id is in list of user's favorited movies.
+   * @param id id of selected movie
+   * @returns boolean
+   */
   isFavorited(id: string): boolean {
     return this.favorites.includes(id);
   }
 
-  // Adds movie to favorites
+  /**
+   * Adds selected movie to user favorites.
+   * @param id id of selected movie
+   */
   handleFavorite(id: string): void {
     this.fetchApiData.addFavorite(id).subscribe(() => {
       this.getFavorites();
     });
   }
 
-  // Removes movie from favorites
+  /**
+   * Deletes selected movie to user favorites.
+   * @param id id of selected movie
+   */
   handleUnfavorite(id: string): void {
     this.fetchApiData.deleteFavorite(id).subscribe(() => {
       this.getFavorites();
     });
   }
-  // Opens director dialog
+
+  /**
+   * Opens the director dialog.
+   * @param name director's name
+   * @param bio director's biography
+   * @param birth director's birth year
+   */
   openDirector(name: string, bio: string, birth: string): void {
     this.dialog.open(MovieDirectorViewComponent, {
       data: {
@@ -76,7 +96,11 @@ export class MovieCardComponent {
     });
   }
 
-  // Opens genre dialog
+  /**
+   * Opens the genre dialog.
+   * @param name genre's name
+   * @param description genres's descripton
+   */
   openGenre(name: string, description: string): void {
     this.dialog.open(MovieGenreViewComponent, {
       data: {
@@ -86,7 +110,13 @@ export class MovieCardComponent {
       width: '500px',
     });
   }
-  // Opens synopsis dialog
+
+  /**
+   * Opens the synopsis dialog.
+   * @param title movie's title
+   * @param imagePath movie's production poster
+   * @param description movie's description
+   */
   openSynopsis(title: string, imagePath: any, description: string): void {
     this.dialog.open(MovieSynopsisViewComponent, {
       data: {

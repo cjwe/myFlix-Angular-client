@@ -1,3 +1,7 @@
+/**
+ * Renders a view of the director of a selected movie.
+ */
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 

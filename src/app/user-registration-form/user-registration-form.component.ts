@@ -1,3 +1,7 @@
+/**
+ * Renders a view of the registration form.
+ */
+
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog'; // closes dialog on success
 import { MatSnackBar } from '@angular/material/snack-bar'; // display notifications
@@ -19,13 +23,16 @@ export class UserRegistrationFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // Sends request to API for user registration
+  /**
+   * Sends data from userData form to API for registration then closes registration dialog.
+   * @returns snackbar message confirmation
+   */
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe(
       (result) => {
         // successful registration
         this.dialogRef.close();
-        console.log(result);
+        // console.log(result);
         this.snackBar.open('User registration succesful!', 'OK', {
           duration: 2000,
         });

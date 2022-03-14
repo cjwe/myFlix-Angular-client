@@ -1,3 +1,7 @@
+/**
+ * Renders a view of the current user's profile.
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,14 +26,12 @@ export class ProfileViewComponent implements OnInit {
     public router: Router
   ) {}
 
-  /**
-   * Gets user profile when the page is opened
-   */
+  // Gets user when page is loaded
   ngOnInit(): void {
     this.getUser();
   }
 
-  // Gets user data to display
+  //Retrieves user data from API, loads user's favorites
   getUser(): void {
     let user = localStorage.getItem('Username');
     console.log(user);
@@ -44,7 +46,7 @@ export class ProfileViewComponent implements OnInit {
     this.dialog.open(UserUpdateFormComponent, { width: '500px' });
   }
 
-  // Get user favorites
+  // Get list of user favorites
   getFavorites(): void {
     this.fetchApiData.getAllMovies().subscribe((res: any) => {
       this.favorites = res.filter((movie: any) => {
@@ -55,7 +57,10 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
-  // Delete a user favorite
+  /**
+   * Deletes selected movie to user favorites.
+   * @param id id of selected movie
+   */
   deleteFavorite(id: string): void {
     this.fetchApiData.deleteFavorite(id).subscribe((res: any) => {
       this.snackBar.open(`Successfully removed from favorite movies.`, 'OK', {
@@ -66,7 +71,9 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
-  // Open confirmation to delete profile or cancel, if confirmed deletes account and clears local storage, reroutes to welcome screen.
+  /**
+   * Open confirmation to delete profile or cancel; if confirmed: deletes account, clears local storage, and reroutes to welcome screen.
+   */
   deleteUser(): void {
     if (confirm('Are you sure? This cannot be undone.')) {
       this.fetchApiData.deleteUser().subscribe(

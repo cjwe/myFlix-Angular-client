@@ -1,3 +1,7 @@
+/**
+ * Renders a view of the user update form.
+ */
+
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
@@ -23,21 +27,21 @@ export class UserUpdateFormComponent implements OnInit {
   ngOnInit(): void {}
 
   /**
-   * Takes the information in the user form (this.userData)
-   * and sends it to fetchApiData.updateUserDetails
+   * Sends data from userData form to API to update user data then closes update dialog and reloads user profile page.
    */
   editUserProfile(): void {
     const username = localStorage.getItem('Username') || '';
     this.fetchApiData
       .editUserProfile(username, this.userData)
       .subscribe((response) => {
-        console.log(response);
-        console.log(this.userData);
+        // console.log(response);
+        // console.log(this.userData);
         this.dialogRef.close();
         window.location.reload();
       });
   }
 
+  // Closes dialog with no changes saved
   cancel(): void {
     this.dialogRef.close();
   }

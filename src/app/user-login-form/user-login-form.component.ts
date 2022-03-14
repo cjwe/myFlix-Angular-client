@@ -1,3 +1,7 @@
+/**
+ * Renders a view of the login form.
+ */
+
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog'; // closes dialog on success
 import { MatSnackBar } from '@angular/material/snack-bar'; // display notifications
@@ -21,16 +25,20 @@ export class UserLoginFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // Sends request to API for user login
+  /**
+   * Sends request to API for jwt token and user data, then stores response in local storage.
+   * App then routes to movie view and confirms login with snack bar message.
+   * @returns snackbar message confirmation
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe(
-      //successful login
+      // successful login
       (result) => {
         localStorage.setItem('Username', result.user.Username);
         localStorage.setItem('token', result.token);
         this.router.navigate(['movies']);
         this.dialogRef.close();
-        console.log(result);
+        // console.log(result);
         this.snackBar.open('User logged in!', 'OK', {
           duration: 2000,
         });
